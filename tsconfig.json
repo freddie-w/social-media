@@ -3,7 +3,10 @@
     "baseUrl": ".",
     "paths": {
       "@/components/*": ["components/*"],
-      "@/styles/*": ["styles/*"]
+      "@/styles/*": ["styles/*"],
+      "@/lib/*": ["lib/*"],
+      "@/layout/*": ["layout/*"],
+      "@/types/*": ["types/*"]
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -19,6 +22,13 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "postcss.config.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "postcss.config.js",
+    "jest.config.js",
+    "jest.setup.js"
+  ],
   "exclude": ["node_modules"]
 }
