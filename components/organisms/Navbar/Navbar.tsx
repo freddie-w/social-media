@@ -10,7 +10,7 @@ import {
   XIcon,
 } from "@heroicons/react/outline";
 import Image from "next/image";
-import SearchBar from "@/components/atoms/SearchBar";
+import SearchBar from "@/components/molecules/SearchBar";
 import { classNames } from "@/lib/classNames";
 
 const user = {

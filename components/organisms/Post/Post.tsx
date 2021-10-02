@@ -1,3 +1,4 @@
+import MoreDropdown from "@/components/molecules/MoreDropdown";
 import {
   ChatAltIcon,
   CodeIcon,
@@ -8,24 +9,7 @@ import {
   ThumbUpIcon,
 } from "@heroicons/react/solid";
 import Image from "next/image";
-import MoreDropdown from "../MoreDropdown";
-
-interface Props {
-  id: string;
-  likes: string;
-  replies: string;
-  views: string;
-  author: {
-    name: string;
-    imageUrl: string;
-    href: string;
-  };
-  date: string;
-  datetime: string;
-  href: string;
-  title: string;
-  body: string;
-}
+import { IPost } from "@/types/IPost";
 
 const dropdownItems = [
   {
@@ -45,12 +29,9 @@ const dropdownItems = [
   },
 ];
 
-const Post: React.FC<Props> = (post) => {
+const Post: React.FC<IPost> = (post) => {
   return (
-    <li
-      key={post.id}
-      className="bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg"
-    >
+    <li className="bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg">
       <article aria-labelledby={"post-title-" + post.id}>
         <div>
           <div className="flex space-x-3">

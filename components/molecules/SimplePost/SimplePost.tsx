@@ -1,20 +1,8 @@
 import Avatar from "@/components/atoms/Avatar";
+import { ISimplePost } from "@/types/IPost";
 import { ChatAltIcon } from "@heroicons/react/solid";
 
-interface Props {
-  post: {
-    id: number;
-    user: {
-      imageUrl: string;
-      name: string;
-      href: string;
-    };
-    body: string;
-    comments: number;
-  };
-}
-
-const SimplePost: React.FC<Props> = ({ post }) => {
+const SimplePost: React.FC<ISimplePost> = (post) => {
   const { user } = post;
 
   return (

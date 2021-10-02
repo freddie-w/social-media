@@ -1,11 +1,8 @@
 import { classNames } from "@/lib/classNames";
+import ITab from "@/types/ITab";
 
 interface Props {
-  tabs: {
-    name: string;
-    href: string;
-    current: boolean;
-  }[];
+  tabs: ITab[];
   handleTabChange: (index: number) => void;
 }
 
@@ -19,9 +16,9 @@ const TabControl: React.FC<Props> = ({ tabs, handleTabChange }) => {
         <select
           id="post-tabs"
           className="block w-full rounded-md border-gray-300 text-base font-medium text-gray-900 shadow-sm focus:border-rose-500 focus:ring-rose-500"
-          defaultValue={tabs.find((tab) => tab?.current)?.name}
+          defaultValue={tabs.find((tab: ITab) => tab.current)?.name}
         >
-          {tabs.map((tab) => (
+          {tabs.map((tab: ITab) => (
             <option key={tab.name}>{tab.name}</option>
           ))}
         </select>
@@ -31,7 +28,7 @@ const TabControl: React.FC<Props> = ({ tabs, handleTabChange }) => {
           className="relative z-0 rounded-lg shadow flex divide-x divide-gray-200"
           aria-label="Tabs"
         >
-          {tabs.map((tab, index) => (
+          {tabs.map((tab: ITab, index: number) => (
             <a
               onClick={() => handleTabChange(index)}
               key={tab.name}

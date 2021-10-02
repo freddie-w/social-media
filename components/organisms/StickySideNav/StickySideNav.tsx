@@ -1,19 +1,9 @@
 import { classNames } from "@/lib/classNames";
+import { IPrimaryNavigation, ISecondaryNavigation } from "@/types/INavigation";
 
 interface Props {
-  primaryNavigation: {
-    name: string;
-    href: string;
-    icon: (props: React.ComponentProps<"svg">) => JSX.Element;
-    current: boolean;
-  }[];
-  secondaryNavigation?: {
-    title: string;
-    items: {
-      name: string;
-      href: string;
-    }[];
-  };
+  primaryNavigation: IPrimaryNavigation[];
+  secondaryNavigation?: ISecondaryNavigation;
 }
 
 const StickySideNav: React.FC<Props> = ({
@@ -66,15 +56,17 @@ const StickySideNav: React.FC<Props> = ({
             className="mt-3 space-y-2"
             aria-labelledby="communities-headline"
           >
-            {secondaryNavigation.items?.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50"
-              >
-                <span className="truncate">{item.name}</span>
-              </a>
-            ))}
+            {secondaryNavigation.items.map(
+              (item: { name: string; href: string }) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50"
+                >
+                  <span className="truncate">{item.name}</span>
+                </a>
+              )
+            )}
           </div>
         </div>
       )}

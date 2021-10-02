@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* .avatar {
-  border-radius: 50%;
-} */
-
 @layer base {
   h2 {
     @apply text-base font-medium text-gray-900;

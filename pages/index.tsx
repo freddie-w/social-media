@@ -1,15 +1,28 @@
-import {
-  FireIcon,
-  HomeIcon,
-  TrendingUpIcon,
-  UserGroupIcon,
-} from "@heroicons/react/solid";
-import Navbar from "@/components/molecules/Navbar";
-import HomeFeed from "@/components/organisms/HomeFeed";
-import StickySideNav from "@/components/molecules/StickySideNav";
-import SnapshotCard from "@/components/molecules/SnapshotCard";
-import SimpleProfile from "@/components/molecules/SimpleProfile";
-import SimplePost from "@/components/molecules/SimplePost";
+import HomeFeed from "@/components/templates/HomeFeed";
+
+const posts = [
+  {
+    id: "81614",
+    likes: "29",
+    replies: "11",
+    views: "2.7k",
+    author: {
+      name: "Dries Vincent",
+      imageUrl:
+        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+      href: "#",
+    },
+    date: "December 9 at 11:43 AM",
+    datetime: "2020-12-09T11:43:00",
+    href: "#",
+    title: "What would you have done differently if you ran Jurassic Park?",
+    body: `
+        <p>Jurassic Park was an incredible idea and a magnificent feat of engineering, but poor protocols and a disregard for human safety killed what could have otherwise been one of the best businesses of our generation.</p>
+        <p>Ultimately, I think that if you wanted to run the park successfully and keep visitors safe, the most important thing to prioritize would be&hellip;</p>
+      `,
+  },
+  // More questions...
+];
 
 const whoToFollow = [
   {
@@ -36,60 +49,12 @@ const trendingPosts = [
   // More posts...
 ];
 
-const primaryNavigation = [
-  { name: "Home", href: "#", icon: HomeIcon, current: true },
-  { name: "Popular", href: "#", icon: FireIcon, current: false },
-  { name: "Communities", href: "#", icon: UserGroupIcon, current: false },
-  { name: "Trending", href: "#", icon: TrendingUpIcon, current: false },
-];
-
-const secondaryNavigation = {
-  title: "My Communities",
-  items: [
-    { name: "Movies", href: "#" },
-    { name: "Food", href: "#" },
-    { name: "Sports", href: "#" },
-    { name: "Animals", href: "#" },
-    { name: "Science", href: "#" },
-    { name: "Dinosaurs", href: "#" },
-    { name: "Talents", href: "#" },
-    { name: "Gaming", href: "#" },
-  ],
-};
-
 export default function Home() {
   return (
-    <div className="relative min-h-screen bg-gray-100">
-      <Navbar />
-
-      <div className="py-10">
-        <div className="max-w-3xl mx-auto sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-12 lg:gap-8">
-          <div className="hidden lg:block lg:col-span-3 xl:col-span-2">
-            <StickySideNav
-              primaryNavigation={primaryNavigation}
-              secondaryNavigation={secondaryNavigation}
-            />
-          </div>
-
-          <HomeFeed />
-
-          <aside className="hidden xl:block xl:col-span-4">
-            <div className="sticky top-4 space-y-4">
-              <SnapshotCard title="Who to follow" href="#">
-                {whoToFollow.map((user) => (
-                  <SimpleProfile key={user.handle} user={user} />
-                ))}
-              </SnapshotCard>
-
-              <SnapshotCard title="Trending" href="#">
-                {trendingPosts.map((post) => (
-                  <SimplePost key={post.id} post={post} />
-                ))}
-              </SnapshotCard>
-            </div>
-          </aside>
-        </div>
-      </div>
-    </div>
+    <HomeFeed
+      posts={posts}
+      whoToFollow={whoToFollow}
+      trendingPosts={trendingPosts}
+    />
   );
 }

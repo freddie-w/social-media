@@ -1,16 +1,8 @@
 import Avatar from "@/components/atoms/Avatar";
+import { ISimpleUser } from "@/types/IUser";
 import { PlusSmIcon } from "@heroicons/react/solid";
 
-interface Props {
-  user: {
-    handle: string;
-    name: string;
-    imageUrl: string;
-    href: string;
-  };
-}
-
-const SimpleProfile: React.FC<Props> = ({ user }) => {
+const SimpleProfile: React.FC<ISimpleUser> = (user) => {
   return (
     <li key={user.handle} className="flex items-center py-4 space-x-3">
       <Avatar href={user.href} imageUrl={user.imageUrl} alt={user.name} />
