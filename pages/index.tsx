@@ -3,9 +3,18 @@ import HomeFeed from "@/components/templates/HomeFeed";
 const posts = [
   {
     id: "81614",
-    likes: "29",
-    replies: "11",
-    views: "2.7k",
+    likes: {
+      total: 29,
+      formatted: "29",
+    },
+    replies: {
+      total: 11,
+      formatted: "11",
+    },
+    views: {
+      total: 2700,
+      formatted: "2.7k",
+    },
     author: {
       name: "Dries Vincent",
       imageUrl:

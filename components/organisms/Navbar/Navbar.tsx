@@ -10,8 +10,8 @@ import {
   XIcon,
 } from "@heroicons/react/outline";
 import Image from "next/image";
-import SearchBar from "@/components/molecules/SearchBar";
 import { classNames } from "@/lib/classNames";
+import SearchBar from "@/components/molecules/SearchBar";
 
 const user = {
   name: "Chelsea Hagon",

@@ -6,6 +6,10 @@
   h2 {
     @apply text-base font-medium text-gray-900;
   }
+
+  select {
+    @apply rounded-md border-gray-300 text-base font-medium text-gray-900 shadow-sm focus:border-rose-500 focus:ring-rose-500;
+  }
 }
 
 @layer utilities {

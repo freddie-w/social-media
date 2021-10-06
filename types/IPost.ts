@@ -1,8 +1,17 @@
 export interface IPost {
   id: string;
-  likes: string;
-  replies: string;
-  views: string;
+  likes: {
+    total: number;
+    formatted: string;
+  };
+  replies: {
+    total: number;
+    formatted: string;
+  };
+  views: {
+    total: number;
+    formatted: string;
+  };
   author: {
     name: string;
     imageUrl: string;

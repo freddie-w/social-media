@@ -10,6 +10,9 @@ import {
 } from "@heroicons/react/solid";
 import Image from "next/image";
 import { IPost } from "@/types/IPost";
+import { useState } from "react";
+import { classNames } from "@/lib/classNames";
+import CommentBar from "@/components/molecules/CommentBar";
 
 const dropdownItems = [
   {
@@ -30,6 +33,8 @@ const dropdownItems = [
 ];
 
 const Post: React.FC<IPost> = (post) => {
+  const [liked, setLiked] = useState(false);
+
   return (
     <li className="bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg">
       <article aria-labelledby={"post-title-" + post.id}>
@@ -70,10 +75,15 @@ const Post: React.FC<IPost> = (post) => {
             <span className="inline-flex items-center text-sm">
               <button
                 type="button"
-                className="inline-flex space-x-2 text-gray-400 hover:text-gray-500"
+                className={classNames(
+                  liked ? "text-gray-900" : "text-gray-400",
+                  "inline-flex space-x-2  hover:text-gray-500"
+                )}
               >
                 <ThumbUpIcon className="h-5 w-5" aria-hidden="true" />
-                <span className="font-medium text-gray-900">{post.likes}</span>
+                <span className="font-medium text-gray-900">
+                  {post.likes.formatted}
+                </span>
                 <span className="sr-only">likes</span>
               </button>
             </span>
@@ -84,7 +94,7 @@ const Post: React.FC<IPost> = (post) => {
               >
                 <ChatAltIcon className="h-5 w-5" aria-hidden="true" />
                 <span className="font-medium text-gray-900">
-                  {post.replies}
+                  {post.replies.formatted}
                 </span>
                 <span className="sr-only">replies</span>
               </button>
@@ -95,7 +105,9 @@ const Post: React.FC<IPost> = (post) => {
                 className="inline-flex space-x-2 text-gray-400 hover:text-gray-500"
               >
                 <EyeIcon className="h-5 w-5" aria-hidden="true" />
-                <span className="font-medium text-gray-900">{post.views}</span>
+                <span className="font-medium text-gray-900">
+                  {post.views.formatted}
+                </span>
                 <span className="sr-only">views</span>
               </button>
             </span>
@@ -111,6 +123,10 @@ const Post: React.FC<IPost> = (post) => {
               </button>
             </span>
           </div>
+        </div>
+
+        <div className="w-full mt-6">
+          <CommentBar />
         </div>
       </article>
     </li>

@@ -18,8 +18,8 @@ import { ISimpleUser } from "@/types/IUser";
 
 interface Props {
   posts: IPost[];
-  whoToFollow: any;
-  trendingPosts: any;
+  whoToFollow: ISimpleUser[];
+  trendingPosts: ISimplePost[];
 }
 
 const feedTabs = [
@@ -80,7 +80,7 @@ const HomeFeed: React.FC<Props> = ({ posts, whoToFollow, trendingPosts }) => {
             <div className="mt-4">
               <h1 className="sr-only">Recent posts</h1>
               <ul role="list" className="space-y-4">
-                {posts.map((post: IPost) => (
+                {posts.map((post) => (
                   <Post key={post.id} {...post} />
                 ))}
               </ul>
@@ -90,13 +90,13 @@ const HomeFeed: React.FC<Props> = ({ posts, whoToFollow, trendingPosts }) => {
           <aside className="hidden xl:block xl:col-span-4">
             <div className="sticky top-4 space-y-4">
               <SnapshotCard title="Who to follow" href="#">
-                {whoToFollow.map((user: ISimpleUser) => (
+                {whoToFollow.map((user) => (
                   <SimpleProfile key={user.handle} {...user} />
                 ))}
               </SnapshotCard>
 
               <SnapshotCard title="Trending" href="#">
-                {trendingPosts.map((post: ISimplePost) => (
+                {trendingPosts.map((post) => (
                   <SimplePost key={post.id} {...post} />
                 ))}
               </SnapshotCard>

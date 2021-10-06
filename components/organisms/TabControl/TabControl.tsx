@@ -15,7 +15,7 @@ const TabControl: React.FC<Props> = ({ tabs, handleTabChange }) => {
         </label>
         <select
           id="post-tabs"
-          className="block w-full rounded-md border-gray-300 text-base font-medium text-gray-900 shadow-sm focus:border-rose-500 focus:ring-rose-500"
+          className="block w-full"
           defaultValue={tabs.find((tab: ITab) => tab.current)?.name}
         >
           {tabs.map((tab: ITab) => (
