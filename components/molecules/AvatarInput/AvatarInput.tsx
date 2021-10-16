@@ -1,7 +1,12 @@
 import Avatar from "@/components/atoms/Avatar";
 import Input from "@/components/atoms/Input";
 
-const CommentBar: React.FC = () => {
+interface Props {
+  input: string;
+  setInput: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const AvatarInput: React.FC<Props> = ({ input, setInput }) => {
   return (
     <div className="flex items-center justify-center">
       <Avatar
@@ -15,11 +20,16 @@ const CommentBar: React.FC = () => {
         </label>
         <div className="relative">
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center"></div>
-          <Input label="comment" placeholder="Your comment" />
+          <Input
+            input={input}
+            setInput={setInput}
+            label="comment"
+            placeholder="Your comment"
+          />
         </div>
       </div>
     </div>
   );
 };
 
-export default CommentBar;
+export default AvatarInput;

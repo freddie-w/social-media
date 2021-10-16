@@ -9,6 +9,8 @@ interface Props {
   setPosts: React.Dispatch<React.SetStateAction<IPost[]>>;
 }
 
+// TODO: Improve header, extra buttons below textarea e.g. add image etc.
+
 const NewPost: React.FC<Props> = ({ setToggleCreatePost, posts, setPosts }) => {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
@@ -29,6 +31,10 @@ const NewPost: React.FC<Props> = ({ setToggleCreatePost, posts, setPosts }) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!input) {
+      return;
+    }
 
     const newPost: IPost = {
       id: "143242432",

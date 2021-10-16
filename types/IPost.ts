@@ -34,3 +34,15 @@ export interface ISimplePost {
   body: string;
   comments: number;
 }
+
+export interface IComment {
+  id: number;
+  body: string;
+  date?: string;
+  datetime?: string;
+  author: {
+    name: string;
+    imageUrl: string;
+    href: string;
+  };
+}

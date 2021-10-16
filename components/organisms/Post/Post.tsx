@@ -1,7 +1,6 @@
 import MoreDropdown from "@/components/molecules/MoreDropdown";
 import {
   ChatAltIcon,
-  CodeIcon,
   EyeIcon,
   FlagIcon,
   ShareIcon,
@@ -12,7 +11,8 @@ import Image from "next/image";
 import { IPost } from "@/types/IPost";
 import { useState } from "react";
 import { classNames } from "@/lib/classNames";
-import CommentBar from "@/components/molecules/CommentBar";
+import AvatarInput from "@/components/molecules/AvatarInput";
+import Comment from "@/components/molecules/Comment";
 
 const dropdownItems = [
   {
@@ -27,11 +27,87 @@ const dropdownItems = [
   },
 ];
 
+const author = {
+  name: "Freddie Wellfair",
+  href: "#",
+  imageUrl:
+    "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+  alt: "Name",
+};
+
+const initialComments = [
+  {
+    id: 1234,
+    body: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi harum provident reprehenderit atque voluptatibus repellendus eum voluptas corporis minus rerum?",
+    date: "none",
+    datetime: "none",
+    author: {
+      name: "Freddie Wellfair",
+      href: "#",
+      imageUrl:
+        "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+      alt: "Name",
+    },
+  },
+  {
+    id: 35435543,
+    body: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+    date: "none",
+    datetime: "none",
+    author: {
+      name: "Freddie Wellfair",
+      href: "#",
+      imageUrl:
+        "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+      alt: "Name",
+    },
+  },
+  {
+    id: 432423423,
+    body: "Lorem ipsum dolor sit amet, consectetur",
+    date: "none",
+    datetime: "none",
+    author: {
+      name: "Freddie Wellfair",
+      href: "#",
+      imageUrl:
+        "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+      alt: "Name",
+    },
+  },
+];
+
 const Post: React.FC<IPost> = (post) => {
   const [liked, setLiked] = useState(false);
+  const [input, setInput] = useState("");
+  const [comments, setComments] = useState(initialComments);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!input) {
+      return;
+    }
+
+    const newComment = {
+      id: 456666666,
+      body: "New Comment",
+      date: "none",
+      datetime: "none",
+      author: {
+        name: "Freddie Wellfair",
+        href: "#",
+        imageUrl:
+          "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+        alt: "Name",
+      },
+    };
+
+    setComments([newComment, ...comments]);
+  };
 
   return (
-    <li className="bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg">
+    <li className="px-4 py-6 card">
       <article aria-labelledby={"post-title-" + post.id}>
         <div>
           <div className="flex space-x-3">
@@ -69,6 +145,7 @@ const Post: React.FC<IPost> = (post) => {
           <div className="flex space-x-6">
             <span className="inline-flex items-center text-sm">
               <button
+                onClick={() => setLiked(!liked)}
                 type="button"
                 className={classNames(
                   liked ? "text-gray-900" : "text-gray-400",
@@ -119,10 +196,16 @@ const Post: React.FC<IPost> = (post) => {
             </span>
           </div>
         </div>
-
-        <div className="w-full mt-6">
-          <CommentBar />
+        <div className="mt-3 ">
+          <div className="space-y-2 flex flex-col items-start">
+            {comments.map((comment) => (
+              <Comment key={comment.id} {...comment} />
+            ))}
+          </div>
         </div>
+        <form onSubmit={handleSubmit} className="w-full mt-3">
+          <AvatarInput input={input} setInput={setInput} />
+        </form>
       </article>
     </li>
   );

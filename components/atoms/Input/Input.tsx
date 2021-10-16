@@ -1,14 +1,24 @@
 import { classNames } from "@/lib/classNames";
 
 interface Props {
+  input: string;
+  setInput: React.Dispatch<React.SetStateAction<string>>;
   label: string;
   placeholder: string;
   icon?: boolean;
 }
 
-const Input: React.FC<Props> = ({ label, placeholder, icon }) => {
+const Input: React.FC<Props> = ({
+  input,
+  setInput,
+  label,
+  placeholder,
+  icon,
+}) => {
   return (
     <input
+      value={input}
+      onChange={(e) => setInput(e.target.value)}
       id={label}
       name={label}
       className={classNames(
