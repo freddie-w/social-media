@@ -1,4 +1,4 @@
-import Feed from "@/components/templates/Feed";
+import PostFeed from "@/components/templates/PostFeed";
 
 const initialPosts = [
   {
@@ -60,7 +60,7 @@ const trendingPosts = [
 
 export default function Trending() {
   return (
-    <Feed
+    <PostFeed
       initialPosts={initialPosts}
       whoToFollow={whoToFollow}
       trendingPosts={trendingPosts}

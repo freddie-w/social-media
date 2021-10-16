@@ -6,7 +6,6 @@ import {
   UserGroupIcon,
 } from "@heroicons/react/solid";
 import TabControl from "@/components/organisms/TabControl";
-import Post, { SkeletonPost } from "@/components/organisms/Post";
 import Navbar from "@/components/organisms/Navbar";
 import StickySideNav from "@/components/organisms/StickySideNav";
 import SnapshotCard from "@/components/organisms/SnapshotCard";
@@ -16,6 +15,7 @@ import ITab from "@/types/ITab";
 import { IPost, ISimplePost } from "@/types/IPost";
 import { ISimpleUser } from "@/types/IUser";
 import NewPostForm from "@/components/organisms/NewPostForm";
+import Banner from "@/components/molecules/Banner";
 
 interface Props {
   initialPosts: IPost[];
@@ -33,14 +33,14 @@ const primaryNavigation = [
 const secondaryNavigation = {
   title: "My Communities",
   items: [
-    { name: "Movies", href: "#" },
-    { name: "Food", href: "#" },
-    { name: "Sports", href: "#" },
-    { name: "Animals", href: "#" },
-    { name: "Science", href: "#" },
-    { name: "Dinosaurs", href: "#" },
-    { name: "Talents", href: "#" },
-    { name: "Gaming", href: "#" },
+    { name: "Movies", href: "/communities/movies" },
+    { name: "Food", href: "/communities/food" },
+    { name: "Sports", href: "/communities/sports" },
+    { name: "Animals", href: "/communities/animals" },
+    { name: "Science", href: "/communities/science" },
+    { name: "Dinosaurs", href: "/communities/dinosaurs" },
+    { name: "Talents", href: "/communities/talents" },
+    { name: "Gaming", href: "/communities/gaming" },
   ],
 };
 
@@ -70,6 +70,8 @@ const CommunitiesFeed: React.FC<Props> = ({
     // Every time tab changes, add fetch /api/posts
   };
 
+  // TODO: create Layout componentwith nav, sticky nav & extra bits
+
   return (
     <div className="relative min-h-screen bg-gray-100">
       <Navbar
@@ -87,11 +89,7 @@ const CommunitiesFeed: React.FC<Props> = ({
           </div>
 
           <main className="lg:col-span-9 xl:col-span-6">
-            <div className="w-full py-8 text-center px-4 bg-white shadow rounded-lg mb-5">
-              <h1 className="text-gray-900">
-                Discover communities (nice banner)
-              </h1>
-            </div>
+            <Banner title="Discover communities (nice banner)" />
 
             <TabControl tabs={tabs} handleTabChange={handleTabChange} />
           </main>

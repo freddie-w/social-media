@@ -16,8 +16,10 @@ import ITab from "@/types/ITab";
 import { IPost, ISimplePost } from "@/types/IPost";
 import { ISimpleUser } from "@/types/IUser";
 import NewPostForm from "@/components/organisms/NewPostForm";
+import Banner from "@/components/molecules/Banner";
 
 interface Props {
+  title?: string;
   initialPosts: IPost[];
   whoToFollow: ISimpleUser[];
   trendingPosts: ISimplePost[];
@@ -32,15 +34,16 @@ const primaryNavigation = [
 
 const secondaryNavigation = {
   title: "My Communities",
+  basePath: null,
   items: [
-    { name: "Movies", href: "#" },
-    { name: "Food", href: "#" },
-    { name: "Sports", href: "#" },
-    { name: "Animals", href: "#" },
-    { name: "Science", href: "#" },
-    { name: "Dinosaurs", href: "#" },
-    { name: "Talents", href: "#" },
-    { name: "Gaming", href: "#" },
+    { name: "Movies", href: "/communities/movies" },
+    { name: "Food", href: "/communities/food" },
+    { name: "Sports", href: "/communities/sports" },
+    { name: "Animals", href: "/communities/animals" },
+    { name: "Science", href: "/communities/science" },
+    { name: "Dinosaurs", href: "/communities/dinosaurs" },
+    { name: "Talents", href: "/communities/talents" },
+    { name: "Gaming", href: "/communities/gaming" },
   ],
 };
 
@@ -51,6 +54,7 @@ const initialTabs = [
 ];
 
 const Feed: React.FC<Props> = ({
+  title,
   initialPosts,
   whoToFollow,
   trendingPosts,
@@ -68,6 +72,7 @@ const Feed: React.FC<Props> = ({
     setTabs(resetCurrent);
   };
 
+  // ! TEMP FAKE SKELETON
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -95,6 +100,8 @@ const Feed: React.FC<Props> = ({
           </div>
 
           <main className="lg:col-span-9 xl:col-span-6">
+            {title && <Banner title="Test" />}
+
             {toggleCreatePost ? (
               <NewPostForm
                 setToggleCreatePost={setToggleCreatePost}

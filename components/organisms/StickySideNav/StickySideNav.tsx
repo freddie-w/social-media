@@ -61,13 +61,11 @@ const StickySideNav: React.FC<Props> = ({
           >
             {secondaryNavigation.items.map(
               (item: { name: string; href: string }) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50"
-                >
-                  <span className="truncate">{item.name}</span>
-                </a>
+                <Link key={item.name} href={item.href} passHref>
+                  <span className="truncate flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50 hover:cursor-pointer">
+                    {item.name}
+                  </span>
+                </Link>
               )
             )}
           </div>

@@ -26,8 +26,8 @@ const initialPosts = [
     href: "#",
     title: "What would you have done differently if you ran Jurassic Park?",
     body: `
-        This is my first post.
-      `,
+          This is my first post.
+        `,
   },
   // More questions...
 ];
@@ -58,9 +58,10 @@ const trendingPosts = [
   // More posts...
 ];
 
-export default function Popular() {
+export default function Community() {
   return (
     <PostFeed
+      title="Movies"
       initialPosts={initialPosts}
       whoToFollow={whoToFollow}
       trendingPosts={trendingPosts}
