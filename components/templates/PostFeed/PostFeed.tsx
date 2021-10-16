@@ -17,6 +17,8 @@ import { IPost, ISimplePost } from "@/types/IPost";
 import { ISimpleUser } from "@/types/IUser";
 import NewPostForm from "@/components/organisms/NewPostForm";
 import Banner from "@/components/molecules/Banner";
+import { useRouter } from "next/dist/client/router";
+import { useTabControl } from "@/hooks/useTabControl";
 
 interface Props {
   title?: string;
@@ -60,16 +62,16 @@ const Feed: React.FC<Props> = ({
   trendingPosts,
 }) => {
   const [toggleCreatePost, setToggleCreatePost] = useState(false);
-  const [tabs, setTabs] = useState(initialTabs);
   const [posts, setPosts] = useState(initialPosts);
+  const { tabs, toggleTab, query } = useTabControl(initialTabs);
+  const { asPath } = useRouter();
 
   const handleTabChange = (index: number) => {
-    const resetCurrent = tabs.map((item: ITab) => ({
-      ...item,
-      current: false,
-    }));
-    resetCurrent[index].current = true;
-    setTabs(resetCurrent);
+    toggleTab(index);
+
+    const path = asPath === "/" ? "" : asPath;
+
+    console.log(`/posts${path}?${query}`);
   };
 
   // ! TEMP FAKE SKELETON

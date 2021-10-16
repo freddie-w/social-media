@@ -16,6 +16,8 @@ import { IPost, ISimplePost } from "@/types/IPost";
 import { ISimpleUser } from "@/types/IUser";
 import NewPostForm from "@/components/organisms/NewPostForm";
 import Banner from "@/components/molecules/Banner";
+import { useRouter } from "next/dist/client/router";
+import { useTabControl } from "@/hooks/useTabControl";
 
 interface Props {
   initialPosts: IPost[];
@@ -45,8 +47,8 @@ const secondaryNavigation = {
 };
 
 const initialTabs = [
-  { name: "Most Popular", query: "liked", current: true },
-  { name: "Most Active", query: "comments", current: false },
+  { name: "Most Popular", query: "popular", current: true },
+  { name: "Most Active", query: "active", current: false },
   { name: "New", query: "new", current: false },
 ];
 
@@ -56,18 +58,14 @@ const CommunitiesFeed: React.FC<Props> = ({
   trendingPosts,
 }) => {
   const [toggleCreatePost, setToggleCreatePost] = useState(false);
-  const [tabs, setTabs] = useState(initialTabs);
   const [posts, setPosts] = useState(initialPosts);
+  const { tabs, toggleTab, query } = useTabControl(initialTabs);
 
   const handleTabChange = (index: number) => {
-    const resetCurrent = tabs.map((item: ITab) => ({
-      ...item,
-      current: false,
-    }));
-    resetCurrent[index].current = true;
-    setTabs(resetCurrent);
+    toggleTab(index);
 
-    // Every time tab changes, add fetch /api/posts
+    // Every time tab changes, fetch relevant posts with tab query
+    console.log(`/communities?${query}`);
   };
 
   // TODO: create Layout componentwith nav, sticky nav & extra bits
