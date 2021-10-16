@@ -16,9 +16,9 @@ const TabControl: React.FC<Props> = ({ tabs, handleTabChange }) => {
         <select
           id="post-tabs"
           className="block w-full"
-          defaultValue={tabs.find((tab: ITab) => tab.current)?.name}
+          defaultValue={tabs.find((tab) => tab.current)?.name}
         >
-          {tabs.map((tab: ITab) => (
+          {tabs.map((tab) => (
             <option key={tab.name}>{tab.name}</option>
           ))}
         </select>
@@ -28,7 +28,7 @@ const TabControl: React.FC<Props> = ({ tabs, handleTabChange }) => {
           className="relative z-0 rounded-lg shadow flex divide-x divide-gray-200"
           aria-label="Tabs"
         >
-          {tabs.map((tab: ITab, index: number) => (
+          {tabs.map((tab, index) => (
             <a
               onClick={() => handleTabChange(index)}
               key={tab.name}

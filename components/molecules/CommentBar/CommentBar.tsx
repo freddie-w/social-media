@@ -1,7 +1,7 @@
 import Avatar from "@/components/atoms/Avatar";
 import Input from "@/components/atoms/Input";
 
-const CommentBar = () => {
+const CommentBar: React.FC = () => {
   return (
     <div className="flex items-center justify-center">
       <Avatar

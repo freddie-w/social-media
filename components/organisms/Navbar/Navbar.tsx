@@ -13,6 +13,11 @@ import Image from "next/image";
 import { classNames } from "@/lib/classNames";
 import SearchBar from "@/components/molecules/SearchBar";
 
+interface Props {
+  toggleCreatePost: boolean;
+  setToggleCreatePost: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 const user = {
   name: "Chelsea Hagon",
   email: "chelseahagon@example.com",
@@ -31,7 +36,7 @@ const navigation = [
   { name: "Trending", href: "#", icon: TrendingUpIcon, current: false },
 ];
 
-const Navbar: React.FC = () => {
+const Navbar: React.FC<Props> = ({ toggleCreatePost, setToggleCreatePost }) => {
   return (
     <>
       {/* When the mobile menu is open, add `overflow-hidden` to the `body` element to prevent double scrollbars */}
@@ -136,12 +141,12 @@ const Navbar: React.FC = () => {
                     </Transition>
                   </Menu>
 
-                  <a
-                    href="#"
-                    className="ml-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-rose-600 hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500"
+                  <button
+                    className="ml-6 btn-primary"
+                    onClick={() => setToggleCreatePost(true)}
                   >
                     New Post
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>
@@ -204,12 +209,12 @@ const Navbar: React.FC = () => {
               </div>
 
               <div className="mt-6 max-w-3xl mx-auto px-4 sm:px-6">
-                <a
-                  href="#"
-                  className="w-full flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-rose-600 hover:bg-rose-700"
+                <button
+                  className="w-full btn-primary"
+                  onClick={() => setToggleCreatePost(true)}
                 >
                   New Post
-                </a>
+                </button>
 
                 <div className="mt-6 flex justify-center">
                   <a

@@ -1,6 +1,6 @@
 import HomeFeed from "@/components/templates/HomeFeed";
 
-const posts = [
+const initialPosts = [
   {
     id: "81614",
     likes: {
@@ -26,8 +26,7 @@ const posts = [
     href: "#",
     title: "What would you have done differently if you ran Jurassic Park?",
     body: `
-        <p>Jurassic Park was an incredible idea and a magnificent feat of engineering, but poor protocols and a disregard for human safety killed what could have otherwise been one of the best businesses of our generation.</p>
-        <p>Ultimately, I think that if you wanted to run the park successfully and keep visitors safe, the most important thing to prioritize would be&hellip;</p>
+        This is my first post.
       `,
   },
   // More questions...
@@ -61,7 +60,7 @@ const trendingPosts = [
 export default function Home() {
   return (
     <HomeFeed
-      posts={posts}
+      initialPosts={initialPosts}
       whoToFollow={whoToFollow}
       trendingPosts={trendingPosts}
     />

@@ -21,11 +21,6 @@ const dropdownItems = [
     icon: StarIcon,
   },
   {
-    name: "Embed",
-    href: "#",
-    icon: CodeIcon,
-  },
-  {
     name: "Report content",
     href: "#",
     icon: FlagIcon,
@@ -62,12 +57,12 @@ const Post: React.FC<IPost> = (post) => {
             </div>
             <MoreDropdown dropdownItems={dropdownItems} />
           </div>
-          <h2 id={"post-title-" + post.id} className="mt-4">
+          {/* <h2 id={"post-title-" + post.id} className="mt-4">
             {post.title}
-          </h2>
+          </h2> */}
         </div>
         <div
-          className="mt-2 text-sm text-gray-700 space-y-4"
+          className="mt-4 text-sm text-gray-700 space-y-4"
           dangerouslySetInnerHTML={{ __html: post.body }}
         />
         <div className="mt-6 flex justify-between space-x-8">

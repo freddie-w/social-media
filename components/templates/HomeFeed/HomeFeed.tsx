@@ -15,9 +15,10 @@ import SimplePost from "@/components/molecules/SimplePost";
 import ITab from "@/types/ITab";
 import { IPost, ISimplePost } from "@/types/IPost";
 import { ISimpleUser } from "@/types/IUser";
+import NewPostForm from "@/components/organisms/NewPostForm";
 
 interface Props {
-  posts: IPost[];
+  initialPosts: IPost[];
   whoToFollow: ISimpleUser[];
   trendingPosts: ISimplePost[];
 }
@@ -49,8 +50,14 @@ const secondaryNavigation = {
   ],
 };
 
-const HomeFeed: React.FC<Props> = ({ posts, whoToFollow, trendingPosts }) => {
+const HomeFeed: React.FC<Props> = ({
+  initialPosts,
+  whoToFollow,
+  trendingPosts,
+}) => {
+  const [toggleCreatePost, setToggleCreatePost] = useState(false);
   const [tabs, setTabs] = useState(feedTabs);
+  const [posts, setPosts] = useState(initialPosts);
 
   const handleTabChange = (index: number) => {
     const resetCurrent = tabs.map((item: ITab) => ({
@@ -64,7 +71,10 @@ const HomeFeed: React.FC<Props> = ({ posts, whoToFollow, trendingPosts }) => {
 
   return (
     <div className="relative min-h-screen bg-gray-100">
-      <Navbar />
+      <Navbar
+        toggleCreatePost={toggleCreatePost}
+        setToggleCreatePost={setToggleCreatePost}
+      />
 
       <div className="py-10">
         <div className="max-w-3xl mx-auto sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-12 lg:gap-8">
@@ -76,15 +86,25 @@ const HomeFeed: React.FC<Props> = ({ posts, whoToFollow, trendingPosts }) => {
           </div>
 
           <main className="lg:col-span-9 xl:col-span-6">
-            <TabControl tabs={tabs} handleTabChange={handleTabChange} />
-            <div className="mt-4">
-              <h1 className="sr-only">Recent posts</h1>
-              <ul role="list" className="space-y-4">
-                {posts.map((post) => (
-                  <Post key={post.id} {...post} />
-                ))}
-              </ul>
-            </div>
+            {toggleCreatePost ? (
+              <NewPostForm
+                setToggleCreatePost={setToggleCreatePost}
+                posts={posts}
+                setPosts={setPosts}
+              />
+            ) : (
+              <>
+                <TabControl tabs={tabs} handleTabChange={handleTabChange} />
+                <div className="mt-4">
+                  <h1 className="sr-only">Recent posts</h1>
+                  <ul role="list" className="space-y-4">
+                    {posts.map((post) => (
+                      <Post key={post.id} {...post} />
+                    ))}
+                  </ul>
+                </div>
+              </>
+            )}
           </main>
 
           <aside className="hidden xl:block xl:col-span-4">

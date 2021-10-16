@@ -3,17 +3,43 @@
 @tailwind utilities;
 
 @layer base {
+  h1,
+  h2,
+  select {
+    @apply text-gray-900;
+  }
+
+  h1 {
+    @apply text-xl sm:text-2xl font-medium;
+  }
+
   h2 {
-    @apply text-base font-medium text-gray-900;
+    @apply text-base font-medium;
+  }
+
+  label {
+    @apply text-gray-800;
   }
 
   select {
-    @apply rounded-md border-gray-300 text-base font-medium text-gray-900 shadow-sm focus:border-rose-500 focus:ring-rose-500;
+    @apply rounded-md border-gray-300 text-base font-medium shadow-sm focus:border-rose-500 focus:ring-rose-500;
   }
 }
 
 @layer utilities {
   .card {
     @apply bg-white rounded-lg shadow;
+  }
+
+  .btn {
+    @apply flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md;
+  }
+
+  .btn-primary {
+    @apply btn text-white  shadow-sm bg-rose-600 hover:bg-rose-700;
+  }
+
+  .btn-secondary {
+    @apply btn text-gray-800 bg-gray-50 sm:bg-transparent hover:bg-gray-100;
   }
 }
