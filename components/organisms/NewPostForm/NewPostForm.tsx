@@ -42,7 +42,7 @@ const NewPost: React.FC<Props> = ({ setToggleCreatePost, posts, setPosts }) => {
         total: 45,
         formatted: "45",
       },
-      replies: {
+      comments: {
         total: 1,
         formatted: "1",
       },

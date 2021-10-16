@@ -1,19 +1,16 @@
 import Avatar from "@/components/atoms/Avatar";
+import { IAuthor } from "@/types/IPost";
 
 interface Props {
   body: string;
   date?: string;
   datetime?: string;
-  author: {
-    name: string;
-    imageUrl: string;
-    href: string;
-  };
+  author: IAuthor;
 }
 
 const Comment: React.FC<Props> = ({ body, author }) => {
   return (
-    <div className="py-3 px-4 bg-gray-50 rounded-lg flex flex-shrink items-start justify-start">
+    <div className="pl-3 pr-6 py-1.5 bg-gray-50 rounded-lg flex flex-shrink items-start justify-start">
       <Avatar href={author.href} imageUrl={author.imageUrl} alt={author.name} />
       <div className="ml-3">
         <a href="" className="inline-block">

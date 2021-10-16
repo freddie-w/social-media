@@ -29,10 +29,9 @@ const TabControl: React.FC<Props> = ({ tabs, handleTabChange }) => {
           aria-label="Tabs"
         >
           {tabs.map((tab, index) => (
-            <a
+            <button
               onClick={() => handleTabChange(index)}
               key={tab.name}
-              href={tab.href}
               aria-current={tab.current ? "page" : undefined}
               className={classNames(
                 tab.current
@@ -51,7 +50,7 @@ const TabControl: React.FC<Props> = ({ tabs, handleTabChange }) => {
                   "absolute inset-x-0 bottom-0 h-0.5"
                 )}
               />
-            </a>
+            </button>
           ))}
         </nav>
       </div>

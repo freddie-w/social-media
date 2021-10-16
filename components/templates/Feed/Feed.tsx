@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   FireIcon,
   HomeIcon,
@@ -6,7 +6,7 @@ import {
   UserGroupIcon,
 } from "@heroicons/react/solid";
 import TabControl from "@/components/organisms/TabControl";
-import Post from "@/components/organisms/Post";
+import Post, { SkeletonPost } from "@/components/organisms/Post";
 import Navbar from "@/components/organisms/Navbar";
 import StickySideNav from "@/components/organisms/StickySideNav";
 import SnapshotCard from "@/components/organisms/SnapshotCard";
@@ -23,17 +23,11 @@ interface Props {
   trendingPosts: ISimplePost[];
 }
 
-const feedTabs = [
-  { name: "Recent", href: "#", current: true },
-  { name: "Most Liked", href: "#", current: false },
-  { name: "Most Answers", href: "#", current: false },
-];
-
 const primaryNavigation = [
-  { name: "Home", href: "#", icon: HomeIcon, current: true },
-  { name: "Popular", href: "#", icon: FireIcon, current: false },
-  { name: "Communities", href: "#", icon: UserGroupIcon, current: false },
-  { name: "Trending", href: "#", icon: TrendingUpIcon, current: false },
+  { name: "Home", href: "/", icon: HomeIcon },
+  { name: "Popular", href: "/popular", icon: FireIcon },
+  { name: "Communities", href: "/communities", icon: UserGroupIcon },
+  { name: "Trending", href: "/trending", icon: TrendingUpIcon },
 ];
 
 const secondaryNavigation = {
@@ -50,13 +44,19 @@ const secondaryNavigation = {
   ],
 };
 
-const HomeFeed: React.FC<Props> = ({
+const initialTabs = [
+  { name: "Most Liked", query: "liked", current: true },
+  { name: "Most Comments", query: "comments", current: false },
+  { name: "New", query: "new", current: false },
+];
+
+const Feed: React.FC<Props> = ({
   initialPosts,
   whoToFollow,
   trendingPosts,
 }) => {
   const [toggleCreatePost, setToggleCreatePost] = useState(false);
-  const [tabs, setTabs] = useState(feedTabs);
+  const [tabs, setTabs] = useState(initialTabs);
   const [posts, setPosts] = useState(initialPosts);
 
   const handleTabChange = (index: number) => {
@@ -65,9 +65,18 @@ const HomeFeed: React.FC<Props> = ({
       current: false,
     }));
     resetCurrent[index].current = true;
-
     setTabs(resetCurrent);
   };
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const skeletonTimer = setTimeout(() => {
+      setLoading(false);
+    }, 750);
+
+    return () => clearTimeout(skeletonTimer);
+  }, []);
 
   return (
     <div className="relative min-h-screen bg-gray-100">
@@ -98,9 +107,11 @@ const HomeFeed: React.FC<Props> = ({
                 <div className="mt-4">
                   <h1 className="sr-only">Recent posts</h1>
                   <ul role="list" className="space-y-4">
-                    {posts.map((post) => (
-                      <Post key={post.id} {...post} />
-                    ))}
+                    {loading ? (
+                      <SkeletonPost />
+                    ) : (
+                      posts.map((post) => <Post key={post.id} {...post} />)
+                    )}
                   </ul>
                 </div>
               </>
@@ -128,4 +139,4 @@ const HomeFeed: React.FC<Props> = ({
   );
 };
 
-export default HomeFeed;
+export default Feed;

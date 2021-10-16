@@ -72,7 +72,16 @@ const initialComments = [
 const Post: React.FC<IPost> = (post) => {
   const [liked, setLiked] = useState(false);
   const [input, setInput] = useState("");
+  const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState(initialComments);
+
+  const toggleComments = () => {
+    if (!comments.length) {
+      return;
+    }
+
+    setShowComments(!showComments);
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -83,7 +92,7 @@ const Post: React.FC<IPost> = (post) => {
 
     const newComment = {
       id: 456666666,
-      body: "New Comment",
+      body: input,
       date: "none",
       datetime: "none",
       author: {
@@ -96,6 +105,11 @@ const Post: React.FC<IPost> = (post) => {
     };
 
     setComments([newComment, ...comments]);
+    setInput("");
+
+    if (!showComments) {
+      setShowComments(true);
+    }
   };
 
   return (
@@ -153,12 +167,13 @@ const Post: React.FC<IPost> = (post) => {
             </span>
             <span className="inline-flex items-center text-sm">
               <button
+                onClick={toggleComments}
                 type="button"
                 className="inline-flex space-x-2 text-gray-400 hover:text-gray-500"
               >
                 <ChatAltIcon className="h-5 w-5" aria-hidden="true" />
                 <span className="font-medium text-gray-900">
-                  {post.replies.formatted}
+                  {post.comments.formatted}
                 </span>
                 <span className="sr-only">replies</span>
               </button>
@@ -189,11 +204,13 @@ const Post: React.FC<IPost> = (post) => {
           </div>
         </div>
         <div className="mt-3 ">
-          <div className="space-y-2 flex flex-col items-start">
-            {comments.map((comment) => (
-              <Comment key={comment.id} {...comment} />
-            ))}
-          </div>
+          {showComments && (
+            <div className="space-y-2 flex flex-col items-start">
+              {comments.map((comment) => (
+                <Comment key={comment.id} {...comment} />
+              ))}
+            </div>
+          )}
         </div>
         <form onSubmit={handleSubmit} className="w-full mt-3">
           <AvatarInput input={input} setInput={setInput} />

@@ -58,7 +58,7 @@ const trendingPosts = [
   // More posts...
 ];
 
-export default function Home() {
+export default function Trending() {
   return (
     <Feed
       initialPosts={initialPosts}

@@ -1,4 +1,4 @@
-import Feed from "@/components/templates/Feed";
+import CommunitiesFeed from "@/components/templates/Discover";
 
 const initialPosts = [
   {
@@ -58,9 +58,9 @@ const trendingPosts = [
   // More posts...
 ];
 
-export default function Home() {
+export default function Communities() {
   return (
-    <Feed
+    <CommunitiesFeed
       initialPosts={initialPosts}
       whoToFollow={whoToFollow}
       trendingPosts={trendingPosts}

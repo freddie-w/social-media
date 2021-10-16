@@ -1,5 +1,5 @@
 export default interface ITab {
   name: string;
-  href: string;
+  query: string;
   current: boolean;
 }
