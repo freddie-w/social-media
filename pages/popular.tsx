@@ -1,25 +1,5 @@
 import Feed from "@/components/templates/Feed";
 
-const db = {
-  users: {
-    some: "",
-  },
-  posts: {
-    // query string fetched from client side on toggle, default to liked. gets authenticated user's posts data from some algorithm on /api/posts using all people they are following, communities etc. on a new post
-
-    // quicksort new post into this array
-    // when you follow someone new/join community add all their posts to it as well
-    liked: [],
-    // quicksort new post into this array
-    // when you follow someone new/join community add all their posts to it as well
-    commented: [],
-    // push new post into this one
-    // when you follow someone new/join community quicksort all their posts to it as well and vice versa for remove
-    new: [],
-    total: 123,
-  },
-};
-
 const initialPosts = [
   {
     id: "81614",
