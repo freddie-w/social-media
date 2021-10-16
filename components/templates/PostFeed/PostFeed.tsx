@@ -19,6 +19,7 @@ import NewPostForm from "@/components/organisms/NewPostForm";
 import Banner from "@/components/molecules/Banner";
 import { useRouter } from "next/dist/client/router";
 import { useTabControl } from "@/hooks/useTabControl";
+import { useFetchPosts } from "@/hooks/useFetchPosts";
 
 interface Props {
   title?: string;
@@ -63,16 +64,9 @@ const Feed: React.FC<Props> = ({
 }) => {
   const [toggleCreatePost, setToggleCreatePost] = useState(false);
   const [posts, setPosts] = useState(initialPosts);
-  const { tabs, toggleTab, query } = useTabControl(initialTabs);
-  const { asPath } = useRouter();
+  const { tabs, handleTabChange, query } = useTabControl(initialTabs);
 
-  const handleTabChange = (index: number) => {
-    toggleTab(index);
-
-    const path = asPath === "/" ? "" : asPath;
-
-    console.log(`/posts${path}?${query}`);
-  };
+  useFetchPosts("/posts", query);
 
   // ! TEMP FAKE SKELETON
   const [loading, setLoading] = useState(true);

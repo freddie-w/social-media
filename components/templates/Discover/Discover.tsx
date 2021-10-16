@@ -18,6 +18,7 @@ import NewPostForm from "@/components/organisms/NewPostForm";
 import Banner from "@/components/molecules/Banner";
 import { useRouter } from "next/dist/client/router";
 import { useTabControl } from "@/hooks/useTabControl";
+import { useFetchPosts } from "@/hooks/useFetchPosts";
 
 interface Props {
   initialPosts: IPost[];
@@ -59,16 +60,7 @@ const CommunitiesFeed: React.FC<Props> = ({
 }) => {
   const [toggleCreatePost, setToggleCreatePost] = useState(false);
   const [posts, setPosts] = useState(initialPosts);
-  const { tabs, toggleTab, query } = useTabControl(initialTabs);
-
-  const handleTabChange = (index: number) => {
-    toggleTab(index);
-
-    // Every time tab changes, fetch relevant posts with tab query
-    console.log(`/communities?${query}`);
-  };
-
-  // TODO: create Layout componentwith nav, sticky nav & extra bits
+  const { tabs, handleTabChange, query } = useTabControl(initialTabs);
 
   return (
     <div className="relative min-h-screen bg-gray-100">

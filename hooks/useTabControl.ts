@@ -4,7 +4,7 @@ import { useState } from "react";
 export const useTabControl = (initialTabs: ITab[]) => {
   const [tabs, setTabs] = useState(initialTabs);
 
-  const toggleTab = (index: number) => {
+  const handleTabChange = (index: number) => {
     const resetCurrent = tabs.map((item: ITab) => ({
       ...item,
       current: false,
@@ -13,11 +13,11 @@ export const useTabControl = (initialTabs: ITab[]) => {
     setTabs(resetCurrent);
   };
 
-  const query = tabs.find((tab) => tab.current)?.query;
+  const query = tabs.find((tab) => tab.current)?.query || "";
 
   return {
     tabs,
-    toggleTab,
+    handleTabChange,
     query,
   };
 };
