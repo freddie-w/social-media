@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Menu, Popover, Transition } from "@headlessui/react";
 import {
   BellIcon,
@@ -37,6 +37,8 @@ const navigation = [
 ];
 
 const Navbar: React.FC<Props> = ({ toggleCreatePost, setToggleCreatePost }) => {
+  const [input, setInput] = useState("");
+
   return (
     <>
       {/* When the mobile menu is open, add `overflow-hidden` to the `body` element to prevent double scrollbars */}
@@ -67,7 +69,7 @@ const Navbar: React.FC<Props> = ({ toggleCreatePost, setToggleCreatePost }) => {
 
                 <div className="min-w-0 flex-1 md:px-8 lg:px-0 xl:col-span-6">
                   <div className="flex items-center px-6 py-4 md:max-w-3xl md:mx-auto lg:max-w-none lg:mx-0 xl:px-0">
-                    <SearchBar />
+                    <SearchBar input={input} setInput={setInput} />
                   </div>
                 </div>
 
