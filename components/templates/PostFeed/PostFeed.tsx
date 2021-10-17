@@ -12,12 +12,10 @@ import StickySideNav from "@/components/organisms/StickySideNav";
 import SnapshotCard from "@/components/organisms/SnapshotCard";
 import SimpleProfile from "@/components/molecules/SimpleProfile";
 import SimplePost from "@/components/molecules/SimplePost";
-import ITab from "@/types/ITab";
 import { IPost, ISimplePost } from "@/types/IPost";
 import { ISimpleUser } from "@/types/IUser";
 import NewPostForm from "@/components/organisms/NewPostForm";
 import Banner from "@/components/molecules/Banner";
-import { useRouter } from "next/dist/client/router";
 import { useTabControl } from "@/hooks/useTabControl";
 import { useFetchPosts } from "@/hooks/useFetchPosts";
 
@@ -65,8 +63,7 @@ const Feed: React.FC<Props> = ({
   const [toggleCreatePost, setToggleCreatePost] = useState(false);
   const [posts, setPosts] = useState(initialPosts);
   const { tabs, handleTabChange, query } = useTabControl(initialTabs);
-
-  useFetchPosts("/posts", query);
+  useFetchPosts(query);
 
   // ! TEMP FAKE SKELETON
   const [loading, setLoading] = useState(true);

@@ -14,12 +14,8 @@ import SimplePost from "@/components/molecules/SimplePost";
 import ITab from "@/types/ITab";
 import { IPost, ISimplePost } from "@/types/IPost";
 import { ISimpleUser } from "@/types/IUser";
-import NewPostForm from "@/components/organisms/NewPostForm";
 import Banner from "@/components/molecules/Banner";
-import { useRouter } from "next/dist/client/router";
 import { useTabControl } from "@/hooks/useTabControl";
-import { useFetchPosts } from "@/hooks/useFetchPosts";
-
 interface Props {
   initialPosts: IPost[];
   whoToFollow: ISimpleUser[];
@@ -53,7 +49,7 @@ const initialTabs = [
   { name: "New", query: "new", current: false },
 ];
 
-const CommunitiesFeed: React.FC<Props> = ({
+const DiscoverFeed: React.FC<Props> = ({
   initialPosts,
   whoToFollow,
   trendingPosts,
@@ -105,4 +101,4 @@ const CommunitiesFeed: React.FC<Props> = ({
   );
 };
 
-export default CommunitiesFeed;
+export default DiscoverFeed;

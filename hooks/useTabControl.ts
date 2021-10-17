@@ -5,7 +5,7 @@ export const useTabControl = (initialTabs: ITab[]) => {
   const [tabs, setTabs] = useState(initialTabs);
 
   const handleTabChange = (index: number) => {
-    const resetCurrent = tabs.map((item: ITab) => ({
+    const resetCurrent = tabs.map((item) => ({
       ...item,
       current: false,
     }));

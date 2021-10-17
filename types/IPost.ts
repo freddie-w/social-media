@@ -1,4 +1,5 @@
-export interface IPost {
+import mongoose from "mongoose";
+export interface IPost extends mongoose.Document {
   id: string;
   likes: {
     total: number;

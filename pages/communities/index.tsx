@@ -1,4 +1,4 @@
-import Discover from "@/components/templates/Discover";
+import DiscoverFeed from "@/components/templates/DiscoverFeed";
 
 const initialPosts = [
   {
@@ -61,7 +61,7 @@ const trendingPosts = [
 
 export default function Communities() {
   return (
-    <Discover
+    <DiscoverFeed
       initialPosts={initialPosts}
       whoToFollow={whoToFollow}
       trendingPosts={trendingPosts}
