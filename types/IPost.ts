@@ -1,5 +1,4 @@
-import mongoose from "mongoose";
-export interface IPost extends mongoose.Document {
+export interface IPost {
   id: string;
   likes: {
     total: number;
@@ -14,7 +13,7 @@ export interface IPost extends mongoose.Document {
     formatted: string;
   };
   author: IAuthor;
-  date: string;
+  date: number;
   datetime: string;
   href: string;
   title: string;

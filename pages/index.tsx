@@ -1,4 +1,8 @@
 import PostFeed from "@/components/templates/PostFeed";
+import { connectToDatabase } from "@/lib/mongodb";
+import { IPost } from "@/types/IPost";
+import Post from "models/Post";
+import { GetServerSideProps } from "next";
 
 const initialPosts = [
   {
@@ -21,7 +25,7 @@ const initialPosts = [
         "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
       href: "#",
     },
-    date: "December 9 at 11:43 AM",
+    date: 12344324,
     datetime: "2020-12-09T11:43:00",
     href: "#",
     title: "What would you have done differently if you ran Jurassic Park?",
@@ -59,10 +63,34 @@ const trendingPosts = [
   // More posts...
 ];
 
-export default function Home() {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  connectToDatabase();
+
+  const res = await Post.find({}, { projection: { _id: 0 } });
+
+  const data = JSON.parse(JSON.stringify(res));
+
+  if (!data) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: {
+      posts: data,
+    }, // will be passed to the page component as props
+  };
+};
+
+interface Props {
+  posts: IPost[];
+}
+
+export default function Home({ posts }: Props) {
   return (
     <PostFeed
-      initialPosts={initialPosts}
+      initialPosts={posts}
       whoToFollow={whoToFollow}
       trendingPosts={trendingPosts}
     />
