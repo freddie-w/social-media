@@ -21,7 +21,7 @@ const initialPosts = [
         "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
       href: "#",
     },
-    date: "December 9 at 11:43 AM",
+    date: 12344324,
     datetime: "2020-12-09T11:43:00",
     href: "#",
     title: "What would you have done differently if you ran Jurassic Park?",
