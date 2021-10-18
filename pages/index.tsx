@@ -3,6 +3,7 @@ import { connectToDatabase } from "@/lib/mongodb";
 import { IPost } from "@/types/IPost";
 import Post from "models/Post";
 import { GetServerSideProps } from "next";
+import { useSession } from "next-auth/react";
 
 const initialPosts = [
   {
@@ -88,6 +89,10 @@ interface Props {
 }
 
 export default function Home({ posts }: Props) {
+  const { data: session } = useSession({ required: false });
+
+  console.log("session", session);
+
   return (
     <PostFeed
       initialPosts={posts}

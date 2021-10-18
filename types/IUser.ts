@@ -1,6 +1,11 @@
-import mongoose from "mongoose";
-
-export interface IUser extends mongoose.Document {}
+export interface IUser {
+  firstName: string;
+  lastName: string;
+  handle: string;
+  imageUrl: string;
+  href?: string;
+  settings: {};
+}
 
 export interface ISimpleUser {
   handle: string;
