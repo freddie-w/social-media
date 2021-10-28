@@ -12,6 +12,8 @@ import {
 import Image from "next/image";
 import { classNames } from "@/lib/classNames";
 import SearchBar from "@/components/molecules/SearchBar";
+import { signOut, useSession } from "next-auth/client";
+import Link from "next/link";
 
 interface Props {
   toggleCreatePost: boolean;
@@ -24,11 +26,19 @@ const user = {
   imageUrl:
     "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
 };
+
 const userNavigation = [
   { name: "Your Profile", href: "#" },
   { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" },
+  {
+    name: "Sign out",
+    handleClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      e.preventDefault();
+      signOut();
+    },
+  },
 ];
+
 const navigation = [
   { name: "Home", href: "#", icon: HomeIcon, current: true },
   { name: "Popular", href: "#", icon: FireIcon, current: false },
@@ -38,6 +48,9 @@ const navigation = [
 
 const Navbar: React.FC<Props> = ({ toggleCreatePost, setToggleCreatePost }) => {
   const [input, setInput] = useState("");
+  const [session] = useSession();
+
+  console.log(session);
 
   return (
     <>
@@ -126,29 +139,46 @@ const Navbar: React.FC<Props> = ({ toggleCreatePost, setToggleCreatePost }) => {
                       <Menu.Items className="origin-top-right absolute z-10 right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-1 focus:outline-none">
                         {userNavigation.map((item) => (
                           <Menu.Item key={item.name}>
-                            {({ active }) => (
-                              <a
-                                href={item.href}
-                                className={classNames(
-                                  active ? "bg-gray-100" : "",
-                                  "block py-2 px-4 text-sm text-gray-700"
-                                )}
-                              >
-                                {item.name}
-                              </a>
-                            )}
+                            {({ active }) =>
+                              item.href ? (
+                                <span
+                                  className={classNames(
+                                    active ? "bg-gray-100" : "",
+                                    "block py-2 px-4 text-sm text-gray-700 hover:cursor-pointer"
+                                  )}
+                                >
+                                  <Link href={item.href}>{item.name}</Link>
+                                </span>
+                              ) : (
+                                <button
+                                  onClick={item.handleClick}
+                                  className={classNames(
+                                    active ? "bg-gray-100" : "",
+                                    "py-2 px-4 w-full flex justify-start text-sm text-gray-700"
+                                  )}
+                                >
+                                  {item.name}
+                                </button>
+                              )
+                            }
                           </Menu.Item>
                         ))}
                       </Menu.Items>
                     </Transition>
                   </Menu>
 
-                  <button
-                    className="ml-6 btn-primary"
-                    onClick={() => setToggleCreatePost(true)}
-                  >
-                    New Post
-                  </button>
+                  {session ? (
+                    <button
+                      className="ml-6 btn-primary"
+                      onClick={() => setToggleCreatePost(true)}
+                    >
+                      New Post
+                    </button>
+                  ) : (
+                    <Link href="/login" passHref>
+                      <button className="ml-6 btn-primary">Log in</button>
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>
@@ -211,12 +241,18 @@ const Navbar: React.FC<Props> = ({ toggleCreatePost, setToggleCreatePost }) => {
               </div>
 
               <div className="mt-6 max-w-3xl mx-auto px-4 sm:px-6">
-                <button
-                  className="w-full btn-primary"
-                  onClick={() => setToggleCreatePost(true)}
-                >
-                  New Post
-                </button>
+                {session ? (
+                  <button
+                    className="w-full btn-primary"
+                    onClick={() => setToggleCreatePost(true)}
+                  >
+                    New Post
+                  </button>
+                ) : (
+                  <Link passHref href="/login">
+                    <button className="w-full btn-primary">Log in</button>
+                  </Link>
+                )}
 
                 <div className="mt-6 flex justify-center">
                   <a

@@ -1,12 +1,23 @@
 import type { AppProps } from "next/app";
 import "@/styles/globals.css";
-import { SessionProvider } from "next-auth/react";
+import { Provider, getSession } from "next-auth/client";
+import { GetServerSideProps } from "next";
+import { useEffect } from "react";
+import { useRouter } from "next/dist/client/router";
 
-function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  return {
+    props: {
+      session: await getSession(context),
+    },
+  };
+};
+
+function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <SessionProvider session={session}>
+    <Provider session={pageProps.session}>
       <Component {...pageProps} />
-    </SessionProvider>
+    </Provider>
   );
 }
 export default MyApp;

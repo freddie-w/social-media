@@ -1,4 +1,10 @@
 export interface DB {
+  providers: {
+    provider: {
+      id: string;
+      name: string;
+    };
+  };
   users: {
     userId: {
       basicInfo: {

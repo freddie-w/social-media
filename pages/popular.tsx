@@ -1,4 +1,6 @@
 import PostFeed from "@/components/templates/PostFeed";
+import { GetServerSideProps } from "next";
+import { getSession } from "next-auth/client";
 
 const initialPosts = [
   {
@@ -57,6 +59,12 @@ const trendingPosts = [
   },
   // More posts...
 ];
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  return {
+    props: {},
+  };
+};
 
 export default function Popular() {
   return (
